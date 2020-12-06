@@ -1,4 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { getCurrency, selectMainPageState } from "./MainPageComponent";
+import { useDispatch, useSelector } from 'react-redux'
+import { Link } from "react-router-dom";
+
 import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
@@ -45,34 +49,42 @@ const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 export default function Mainpage() {
 
+  const mainPageState = useSelector(selectMainPageState);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getCurrency());
+  }, [dispatch]);
+
   const classes = useStyles();
 
   return (
     <React.Fragment>
+      <button onClick={() => {
+        console.log(mainPageState)
+      }}>CLICK</button>
       <CssBaseline />
       <main >
         <Container className={classes.cardGrid} maxWidth="md">
           <Grid container spacing={4}>
-            {cards.map((card) => (
-              <Grid item key={card} xs={12} sm={6} md={4}>
+            {mainPageState.currentCurrencyArr.map((item) => (
+              <Grid item key={item.id} xs={12} sm={6} md={4}>
                 <Card className={classes.card}>
-                  <CardMedia
-                    className={classes.cardMedia}
-                    image="https://source.unsplash.com/random"
-                    title="Image title"
-                  />
                   <CardContent className={classes.cardContent}>
                     <Typography gutterBottom variant="h5" component="h2">
-                      Heading
+                      {item.name} - {item.symbol}
                     </Typography>
                     <Typography>
-                      This is a media card. You can use this section to describe
-                      the content.
+                      Price, $: {Number(item.priceUsd).toFixed(3)}
+                    </Typography>
+                    <Typography>
+                      Max Supply: {Number(item.maxSupply).toFixed(3)}
                     </Typography>
                   </CardContent>
                   <CardActions>
                     <Button size="small" color="primary">
-                      View
+                      <Link to={`/currentCurrency/${item.name}`} style={{ textDecoration: "none" }}>
+                        View
+                      </Link>
                     </Button>
                     <Button size="small" color="primary">
                       Edit

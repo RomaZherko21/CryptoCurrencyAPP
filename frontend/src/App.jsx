@@ -5,6 +5,7 @@ import Mainpage from "./components/mainPage/MainPage";
 import SignIn from "./components/signIn/SignIn";
 import SignUp from "./components/signUp/SignUp";
 import NavBar from "./components/NavBar";
+import CurrentCurrency from "./components/currentCurrency/CurrentCurrency";
 
 const App = () => {
   return (
@@ -19,6 +20,9 @@ const App = () => {
         </Route>
         <Route path="/signUp">
           <SignUp />
+        </Route>
+        <Route path="/currentCurrency">
+          <CurrentCurrency />
         </Route>
       </Switch>
     </Router>
