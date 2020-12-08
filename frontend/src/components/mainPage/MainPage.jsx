@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
-import { getCurrency, selectMainPageState } from "./MainPageComponent";
+import { getCurrency, selectCurrentCurrencyArr } from "./MainPageComponent";
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from "react-router-dom";
+import Filters from './filters/Filters'
 
 import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
@@ -47,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Mainpage() {
 
-  const mainPageState = useSelector(selectMainPageState);
+  const currentCurrencyArr = useSelector(selectCurrentCurrencyArr);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getCurrency());
@@ -56,15 +57,11 @@ export default function Mainpage() {
   const classes = useStyles();
 
   return (
-    <React.Fragment>
-      <button onClick={() => {
-        console.log(mainPageState)
-      }}>CLICK</button>
-      <CssBaseline />
-      <main >
+    <>
+      <Filters />
         <Container className={classes.cardGrid} maxWidth="md">
           <Grid container spacing={4}>
-            {mainPageState.currentCurrencyArr.map((item) => (
+            {currentCurrencyArr.map((item) => (
               <Grid item key={item.id} xs={12} sm={6} md={4}>
                 <Card className={classes.card}>
                   <CardContent className={classes.cardContent}>
@@ -80,7 +77,7 @@ export default function Mainpage() {
                   </CardContent>
                   <CardActions>
                     <Button size="small" color="primary">
-                      <Link to={`/currentCurrency/${item.name}`} style={{ textDecoration: "none" }}>
+                      <Link to={`/currentCurrency/${item.id}`} style={{ textDecoration: "none" }}>
                         View
                       </Link>
                     </Button>
@@ -93,7 +90,6 @@ export default function Mainpage() {
             ))}
           </Grid>
         </Container>
-      </main>
-    </React.Fragment>
+    </>
   );
 }

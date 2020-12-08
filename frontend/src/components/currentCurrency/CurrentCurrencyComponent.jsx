@@ -3,7 +3,7 @@ import axios from 'axios';
 
 
 export const getCurrencyInfo = createAsyncThunk('currentCurrency/getCurrencyInfo', async () => {
-  let response = await axios.get(`https://api.coincap.io/v2/assets/${window.location.pathname.split('/')[2].toLocaleLowerCase()}`);
+  let response = await axios.get(`https://api.coincap.io/v2/assets/${window.location.pathname.split('/')[2]}`);
   return response.data.data;
 })
 
