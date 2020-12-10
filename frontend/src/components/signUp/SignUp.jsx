@@ -47,7 +47,7 @@ export default function SignUp() {
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
-        <Typography component="h1" variant="h5">
+        <Typography hy component="h1" variant="h5">
           Sign up
         </Typography>
         <form className={classes.form} noValidate>
@@ -63,6 +63,8 @@ export default function SignUp() {
                 label="First Name"
                 autoFocus
                 value={signUpState.firstName}
+                error={signUpState.errors.firstName}
+                helperText={signUpState.errors.firstName?"Min Size 2":''}
                 onChange={(e) => dispatch(onFirstNameTyping(e.target.value))}
               />
             </Grid>
@@ -75,6 +77,8 @@ export default function SignUp() {
                 label="Last Name"
                 name="lastName"
                 autoComplete="lname"
+                error={signUpState.errors.lastName}
+                helperText={signUpState.errors.lastName?"Min Size 2":''}
                 value={signUpState.lastName}
                 onChange={(e) => dispatch(onLastNameTyping(e.target.value))}
               />
@@ -88,6 +92,8 @@ export default function SignUp() {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
+                error={signUpState.errors.email}
+                helperText={signUpState.errors.email?"Need correct @mail!":''}
                 value={signUpState.email}
                 onChange={(e) => dispatch(onEmailTyping(e.target.value))}
               />
@@ -101,6 +107,8 @@ export default function SignUp() {
                 label="Password"
                 type="password"
                 id="password"
+                error={signUpState.errors.password}
+                helperText={signUpState.errors.password?"Need correct password!":''}
                 autoComplete="current-password"
                 value={signUpState.password}
                 onChange={(e) => dispatch(onPasswordTyping(e.target.value))}
