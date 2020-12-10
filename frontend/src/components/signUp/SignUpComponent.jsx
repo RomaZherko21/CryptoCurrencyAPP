@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import signUpAPI from '../../api/signUp'
 
 export const slice = createSlice({
   name: 'signUp',
@@ -48,7 +49,8 @@ export const slice = createSlice({
       state.password = action.payload;
     },
     onSubmit: state => {
-      console.log('Send on server fuck', { firstName: state.firstName, lastName: state.lastName, email: state.email, password: state.password });
+      signUpAPI.postNewUser({ firstName: state.firstName, lastName: state.lastName, email: state.email, password: state.password })
+      console.log('Send on server', );
       state.firstName = '';
       state.lastName = '';
       state.password = '';
