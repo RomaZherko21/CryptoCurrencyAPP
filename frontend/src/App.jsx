@@ -5,6 +5,7 @@ import Mainpage from "./components/mainPage/MainPage";
 import SignIn from "./components/signIn/SignIn";
 import SignUp from "./components/signUp/SignUp";
 import NavBar from "./components/NavBar";
+import Profile from "./components/profile/Profile";
 import CurrentCurrency from "./components/currentCurrency/CurrentCurrency";
 
 const App = () => {
@@ -23,6 +24,9 @@ const App = () => {
         </Route>
         <Route path="/currentCurrency">
           <CurrentCurrency />
+        </Route>
+        <Route path="/profile">
+          <Profile />
         </Route>
       </Switch>
     </Router>

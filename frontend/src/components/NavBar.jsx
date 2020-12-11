@@ -1,4 +1,7 @@
 import React from "react";
+import { selectSignInState } from './signIn/SignInComponent';
+import { useSelector } from 'react-redux';
+
 import { makeStyles } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
 import Button from "@material-ui/core/Button";
@@ -25,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function NavBar() {
   const classes = useStyles();
+  const signInState = useSelector(selectSignInState);
 
   const linkStyles = {
     textDecoration: "none",
@@ -32,28 +36,35 @@ export default function NavBar() {
   return (
     <React.Fragment>
       <Toolbar className={classes.toolbar}>
-        <Button size="small">Subscribe</Button>
         <Typography
           component="h2"
-          variant="h5"  
+          variant="h5"
           color="inherit"
           align="center"
           noWrap
           className={classes.toolbarTitle}
         >
-          <Link to="/" style={{...linkStyles, color:'black'}}>Cryptocurrency</Link>
+          <Link to="/" style={{ ...linkStyles, color: 'black' }}>Cryptocurrency</Link>
         </Typography>
-        <Button color="primary" size="small">
-          <Link to="/signIn" style={linkStyles}>
-            {" "}
-            Sign In{" "}
-          </Link>
-        </Button>
-        <Button color="primary" size="small">
-          <Link to="/signUp" style={linkStyles}>
-            Sign up{" "}
-          </Link>
-        </Button>
+        {!signInState.isSignedIn &&
+          <Button color="primary" size="small">
+            <Link to="/signIn" style={linkStyles}>
+                Sign In
+             </Link>
+          </Button>
+        }
+        {signInState.isSignedIn && <div>
+          <Button color="primary" size="small">
+            <Link to="/profile" style={linkStyles}>
+              <i className="fas fa-id-card"></i>
+            </Link>
+          </Button>
+          <Button color="primary" size="small">
+            <Link to="/signUp" style={linkStyles}>
+              Sign up
+            </Link>
+          </Button>
+        </div>}
       </Toolbar>
     </React.Fragment>
   );
