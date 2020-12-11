@@ -1,4 +1,4 @@
-import React from "react"; 
+import React from "react";
 import { onEmailTyping, onPasswordTyping, onSubmit, selectSignInState } from './SignInComponent';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -64,7 +64,7 @@ export default function SignIn() {
             autoComplete="email"
             autoFocus
             value={signInState.email}
-            onChange={(e)=>dispatch(onEmailTyping(e.target.value))}
+            onChange={(e) => dispatch(onEmailTyping(e.target.value))}
           />
           <TextField
             variant="outlined"
@@ -77,7 +77,7 @@ export default function SignIn() {
             id="password"
             autoComplete="current-password"
             value={signInState.password}
-            onChange={(e)=>dispatch(onPasswordTyping(e.target.value))}
+            onChange={(e) => dispatch(onPasswordTyping(e.target.value))}
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
@@ -89,9 +89,9 @@ export default function SignIn() {
             variant="contained"
             color="primary"
             className={classes.submit}
-            onClick={(e)=>{
+            onClick={(e) => {
               e.preventDefault();
-              dispatch(onSubmit());
+              dispatch(onSubmit(signInState));
             }}
           >
             Sign In
@@ -101,6 +101,9 @@ export default function SignIn() {
               {"Don't have an account? Sign Up"}
             </Link>
           </Grid>
+          <Typography component="h6" style={{ color: 'red' }}>
+            {signInState.errMessage}
+          </Typography>
         </form>
       </div>
     </Container>

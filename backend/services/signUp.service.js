@@ -1,15 +1,17 @@
 const app = require("../app");
 class SignUpService {
   postNewUser(user, res) {
-    console.log(user);
     let sql = `INSERT  users( firstName, lastName, email, password)
          VALUES ('${user.firstName}', '${user.lastName}', '${user.email}', '${user.password}');`;
-         app.connection.query(sql, (err, _) => {
+    app.connection.query(sql, (err, _) => {
       if (err) {
         console.log("ERROR POST new user:" + err.message);
-        res.json({ message: `ERROR POST new user : ${err.message}` });
+        res.json({
+          error: true
+        });
       } else {
-        res.json({ message: `${user.email} was saved` });
+        console.log("POST new user: new user was created");
+        res.json({ message: `${user.email} was saved`, error: false });
       }
     });
   }

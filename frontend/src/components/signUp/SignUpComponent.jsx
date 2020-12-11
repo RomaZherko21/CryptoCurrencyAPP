@@ -1,5 +1,10 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import signUpAPI from '../../api/signUp'
+
+export const onSubmit = createAsyncThunk('signUp/onSubmit', async (state) => {
+  let response = await signUpAPI.postNewUser({ firstName: state.firstName, lastName: state.lastName, email: state.email, password: state.password })
+  return response.data;
+})
 
 export const slice = createSlice({
   name: 'signUp',
@@ -13,7 +18,8 @@ export const slice = createSlice({
       lastName: false,
       email: false,
       password: false,
-    }
+    },
+    response: { message: '', color: '' },
   },
   reducers: {
     onFirstNameTyping: (state, action) => {
@@ -35,31 +41,40 @@ export const slice = createSlice({
     onEmailTyping: (state, action) => {
 
       !/^[A-Z0-9a-z_]{3,}@[a-z]{2,6}\.[a-z]{2,4}$/g.test(action.payload)
-      ? (state.errors.email = true)
-      : (state.errors.email = false);
+        ? (state.errors.email = true)
+        : (state.errors.email = false);
 
       state.email = action.payload;
     },
     onPasswordTyping: (state, action) => {
 
       !/^[a-z0-9.!&/#%*?()]{4,}$/gi.test(action.payload)
-      ? (state.errors.password = true)
-      : (state.errors.password = false);
+        ? (state.errors.password = true)
+        : (state.errors.password = false);
 
       state.password = action.payload;
-    },
-    onSubmit: state => {
-      signUpAPI.postNewUser({ firstName: state.firstName, lastName: state.lastName, email: state.email, password: state.password })
-      console.log('Send on server', );
-      state.firstName = '';
-      state.lastName = '';
-      state.password = '';
-      state.email = '';
     }
+  },
+  extraReducers: {
+    [onSubmit.fulfilled]: (state, action) => {
+      if (action.payload.error) {
+        state.errors.email = true;
+        state.response.message = action.payload.message || 'This Email has alredy been registrated!';
+        state.response.color = 'red';
+      } else {
+        state.response.message = 'User was seved!';
+        state.response.color = 'green';
+        state.firstName = '';
+        state.lastName = '';
+        state.password = '';
+        state.email = '';
+      }
+
+    },
   },
 });
 
-export const { onFirstNameTyping, onLastNameTyping, onEmailTyping, onPasswordTyping, onSubmit } = slice.actions;
+export const { onFirstNameTyping, onLastNameTyping, onEmailTyping, onPasswordTyping } = slice.actions;
 
 export const selectSignUpState = (state) => state.signUp;
 

@@ -2,9 +2,8 @@ import * as axios from "axios";
 const URL = "http://localhost:5000";
 
 const signUpAPI = {
-  postNewUser(user) {
-    console.log(user)
-    return axios.post(`${URL}/signUp`, user);
+  async postNewUser(user) {
+    return await axios.post(`${URL}/signUp`, user);
   },
 };
 

@@ -4,7 +4,6 @@ import { onFirstNameTyping, onLastNameTyping, onEmailTyping, onPasswordTyping, o
 
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
@@ -42,12 +41,11 @@ export default function SignUp() {
 
   return (
     <Container component="main" maxWidth="xs">
-      <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
-        <Typography hy component="h1" variant="h5">
+        <Typography component="h1" variant="h5">
           Sign up
         </Typography>
         <form className={classes.form} noValidate>
@@ -64,7 +62,7 @@ export default function SignUp() {
                 autoFocus
                 value={signUpState.firstName}
                 error={signUpState.errors.firstName}
-                helperText={signUpState.errors.firstName?"Min Size 2":''}
+                helperText={signUpState.errors.firstName ? "Min Size 2" : ''}
                 onChange={(e) => dispatch(onFirstNameTyping(e.target.value))}
               />
             </Grid>
@@ -78,7 +76,7 @@ export default function SignUp() {
                 name="lastName"
                 autoComplete="lname"
                 error={signUpState.errors.lastName}
-                helperText={signUpState.errors.lastName?"Min Size 2":''}
+                helperText={signUpState.errors.lastName ? "Min Size 2" : ''}
                 value={signUpState.lastName}
                 onChange={(e) => dispatch(onLastNameTyping(e.target.value))}
               />
@@ -93,7 +91,7 @@ export default function SignUp() {
                 name="email"
                 autoComplete="email"
                 error={signUpState.errors.email}
-                helperText={signUpState.errors.email?"Need correct @mail!":''}
+                helperText={signUpState.errors.email ? "Need correct @mail!" : ''}
                 value={signUpState.email}
                 onChange={(e) => dispatch(onEmailTyping(e.target.value))}
               />
@@ -108,7 +106,7 @@ export default function SignUp() {
                 type="password"
                 id="password"
                 error={signUpState.errors.password}
-                helperText={signUpState.errors.password?"Need correct password!":''}
+                helperText={signUpState.errors.password ? "Need correct password!" : ''}
                 autoComplete="current-password"
                 value={signUpState.password}
                 onChange={(e) => dispatch(onPasswordTyping(e.target.value))}
@@ -123,7 +121,7 @@ export default function SignUp() {
             className={classes.submit}
             onClick={(e) => {
               e.preventDefault();
-              dispatch(onSubmit())
+              dispatch(onSubmit(signUpState))
             }}
           >
             Sign Up
@@ -135,6 +133,9 @@ export default function SignUp() {
               </Link>
             </Grid>
           </Grid>
+          <Typography component="h5" style={{ color: signUpState.response.color }}>
+            {signUpState.response.message}
+          </Typography>
         </form>
       </div>
     </Container>
