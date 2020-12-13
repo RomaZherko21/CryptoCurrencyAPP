@@ -5,6 +5,7 @@ import signUpReducer from '../components/signUp/SignUpComponent';
 import mainPageReducer from '../components/mainPage/MainPageComponent';
 import currentCurrencyReducer from '../components/currentCurrency/CurrentCurrencyComponent';
 import filterReducer from '../components/mainPage/filters/FilterComponent';
+import profileReducer from '../components/profile/ProfileComponent';
 
 export default configureStore({
   reducer: {
@@ -13,5 +14,6 @@ export default configureStore({
     mainPage: mainPageReducer,
     currentCurrency: currentCurrencyReducer,
     filter: filterReducer,
+    profile: profileReducer,
   }
 });
