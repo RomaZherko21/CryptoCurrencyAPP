@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectProfileState, onPageChange } from '../ProfileComponent'
 
@@ -15,8 +15,9 @@ export default function UsersList() {
   const profileState = useSelector(selectProfileState);
   const dispatch = useDispatch();
 
+  const input = useRef(null);
+
   useEffect(() => {
-    console.log('HERE')
     dispatch(onPageChange(profileState.currentPage))
   }, [])
 
@@ -28,14 +29,19 @@ export default function UsersList() {
             <TableCell>Email</TableCell>
             <TableCell>First Name</TableCell>
             <TableCell>Last Name</TableCell>
+            <TableCell></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {profileState.currentUsersList.map((item) => (
             <TableRow key={item.email}>
-              <TableCell>{item.email}</TableCell>
+              <TableCell> <input ref={input} type="text" value={item.email} disabled={true}/></TableCell>
               <TableCell>{item.firstName}</TableCell>
               <TableCell>{item.lastName}</TableCell>
+              <TableCell>  <Button variant="contained" onClick={() => {
+               input.current.disabled = false;
+              }}>Edit</Button>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>

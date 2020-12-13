@@ -4,7 +4,6 @@ import usersListAPI from '../../api/usersList';
 
 export const onPageChange = createAsyncThunk('profile/onPageChange', async (page) => {
   let response = await usersListAPI.getUsers(page);
-  console.log(response)
   return {users:response.data.users, page};
 })
 
@@ -24,7 +23,7 @@ export const slice = createSlice({
   },
 });
 
-export const { } = slice.actions;
+// export const { } = slice.actions;
 
 export const selectProfileState = (state) => state.profile;
 
