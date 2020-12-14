@@ -14,6 +14,20 @@ class AllUsersService {
       }
     });
   }
+  putUser(user, res) {
+    let sql = `UPDATE users SET  firstName='${user.firstName}', lastName='${user.lastName}'
+    WHERE email='${user.email}'`;
+    app.connection.query(sql, (err, user) => {
+      if (err) {
+        res.json({
+          error: true,
+          message: "Server ERROR!",
+        });
+      } else {
+        res.json({message:'user was changed!'});
+      }
+    });
+  }
 }
 
 module.exports = new AllUsersService();

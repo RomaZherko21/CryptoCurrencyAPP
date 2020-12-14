@@ -1,6 +1,6 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectProfileState, onPageChange } from '../ProfileComponent'
+import { selectProfileState, onPageChange,onPutUser } from '../ProfileComponent'
 
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -10,13 +10,33 @@ import TableRow from '@material-ui/core/TableRow';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 
+
+function TableFields({ item }) {
+  const firstNameInput = useRef(null);
+  const lastNameInput = useRef(null);
+  const dispatch = useDispatch();
+  let [buttonText, setButtonText] = useState('Edit')
+  return (
+    <TableRow>
+      <TableCell> {item.email}</TableCell>
+      <TableCell> <input ref={firstNameInput} type="text" defaultValue={item.firstName} disabled={true} /></TableCell>
+      <TableCell> <input ref={lastNameInput} type="text" defaultValue={item.lastName} disabled={true} /></TableCell>
+      <TableCell>  <Button variant="contained" style={{width:'70px'}} onClick={() => {
+        firstNameInput.current.disabled = !firstNameInput.current.disabled;
+        lastNameInput.current.disabled = !lastNameInput.current.disabled;
+        buttonText === 'Edit' ? setButtonText('Save') : setButtonText('Edit');
+        if(buttonText === 'Save'){dispatch(onPutUser({email: item.email, firstName: firstNameInput.current.value, lastName: lastNameInput.current.value}))}
+      }}>{buttonText}</Button>
+      </TableCell>
+    </TableRow>
+  )
+}
+
+
 export default function UsersList() {
 
   const profileState = useSelector(selectProfileState);
   const dispatch = useDispatch();
-
-  const input = useRef(null);
-
   useEffect(() => {
     dispatch(onPageChange(profileState.currentPage))
   }, [])
@@ -34,15 +54,7 @@ export default function UsersList() {
         </TableHead>
         <TableBody>
           {profileState.currentUsersList.map((item) => (
-            <TableRow key={item.email}>
-              <TableCell> <input ref={input} type="text" value={item.email} disabled={true}/></TableCell>
-              <TableCell>{item.firstName}</TableCell>
-              <TableCell>{item.lastName}</TableCell>
-              <TableCell>  <Button variant="contained" onClick={() => {
-               input.current.disabled = false;
-              }}>Edit</Button>
-              </TableCell>
-            </TableRow>
+            <TableFields item={item} key={item.email}/>
           ))}
         </TableBody>
       </Table>
