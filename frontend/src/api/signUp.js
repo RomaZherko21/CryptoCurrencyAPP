@@ -1,9 +1,9 @@
 import * as axios from "axios";
-const URL = "http://localhost:5000";
+import config from './config'
 
 const signUpAPI = {
   async postNewUser(user) {
-    return await axios.post(`${URL}/signUp`, user);
+    return await axios.post(`${config.URL}/signUp`, user);
   },
 };
 

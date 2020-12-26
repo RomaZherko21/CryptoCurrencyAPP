@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import signInAPI from '../../api/signIn'
+import signInAPI from '../api/signIn'
 
 export const onSubmit = createAsyncThunk('signIn/onSubmit', async (state) => {
   let response = await signInAPI.signIn({ email: state.email, password: state.password })

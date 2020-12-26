@@ -1,5 +1,5 @@
 import React from "react";
-import { selectSignInState } from './signIn/SignInComponent';
+import { selectSignInState } from '../state/signInReducer';
 import { useSelector } from 'react-redux';
 
 import { makeStyles } from "@material-ui/core/styles";

@@ -1,5 +1,5 @@
 import React from "react";
-import { onEmailTyping, onPasswordTyping, onSubmit, selectSignInState } from './SignInComponent';
+import { onEmailTyping, onPasswordTyping, onSubmit, selectSignInState } from '../../state/signInReducer';
 import { useSelector, useDispatch } from 'react-redux';
 
 import Avatar from "@material-ui/core/Avatar";

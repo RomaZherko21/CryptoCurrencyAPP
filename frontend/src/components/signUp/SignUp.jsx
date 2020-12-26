@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { onFirstNameTyping, onLastNameTyping, onEmailTyping, onPasswordTyping, onSubmit, selectSignUpState } from './SignUpComponent';
+import { onFirstNameTyping, onLastNameTyping, onEmailTyping, onPasswordTyping, onSubmit, selectSignUpState } from '../../state/signUpReducer';
 
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';

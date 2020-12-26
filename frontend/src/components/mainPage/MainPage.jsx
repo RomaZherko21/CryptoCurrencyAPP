@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
-import { getCurrency, selectCurrentCurrencyArr } from "./MainPageComponent";
+import { getCurrency, selectCurrentCurrencyArr } from "../../state/mainPageReducer";
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from "react-router-dom";
-import Filters from './filters/Filters'
+import Filters from './Filters'
 
 import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";

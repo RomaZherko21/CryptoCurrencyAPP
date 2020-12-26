@@ -2,8 +2,8 @@ import React from 'react';
 // import { useDispatch, useSelector } from 'react-redux';
 // import { selectProfileState } from './ProfileComponent';
 
-import Info from './info/Info'
-import UsersList from './usersList/UsersList'
+import Info from './Info'
+import UsersList from './UsersList'
 
 
 

@@ -1,9 +1,9 @@
 import * as axios from "axios";
-const URL = "http://localhost:5000";
+import config from './config'
 
 const signInAPI = {
   async signIn(user) {
-    return await axios.get(`${URL}/signIn?email=${user.email}&password=${user.password}`);
+    return await axios.get(`${config.URL}/signIn?email=${user.email}&password=${user.password}`);
   },
 };
 

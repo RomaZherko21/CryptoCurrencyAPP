@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import usersListAPI from '../../api/usersList';
+import usersListAPI from '../api/usersList';
 
 
 export const onPageChange = createAsyncThunk('profile/onPageChange', async (page) => {

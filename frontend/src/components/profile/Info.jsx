@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { selectSignInState } from '../../signIn/SignInComponent';
+import { selectSignInState } from '../../state/signInReducer';
 
 import Typography from '@material-ui/core/Typography';
 import Grid from "@material-ui/core/Grid";

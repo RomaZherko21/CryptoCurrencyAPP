@@ -1,12 +1,9 @@
 import React, { useEffect } from "react";
-import { getCurrencyHistory, getCurrencyInfo, selectCurrentCurrency } from "./CurrentCurrencyComponent";
+import { getCurrencyHistory, getCurrencyInfo, selectCurrentCurrency } from "../../state/currentCurrencyReducer";
 import { useDispatch, useSelector } from 'react-redux'
-import History from './history/History'
-import Chart from './chart/Chart'
-import Info from './info/Info'
-
-
-
+import History from './History'
+import Chart from './Chart'
+import Info from './Info'
 
 export default function CurrentCurrency() {
 

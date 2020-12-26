@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectProfileState, onPageChange,onPutUser } from '../ProfileComponent'
+import { selectProfileState, onPageChange,onPutUser } from '../../state/profileReducer'
 
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
