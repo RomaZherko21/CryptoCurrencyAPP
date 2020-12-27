@@ -1,12 +1,12 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 export const slice = createSlice({
-  name: 'filter',
+  name: "filter",
   initialState: {
-    filterParams:{
-      name:'',
-      price:20000,
-    }
+    filterParams: {
+      name: "",
+      price: 20000,
+    },
   },
   reducers: {
     onNameFilter: (state, action) => {
@@ -14,7 +14,7 @@ export const slice = createSlice({
     },
     onPriceFilter: (state, action) => {
       state.filterParams.price = action.payload;
-    }
+    },
   },
 });
 
@@ -23,4 +23,3 @@ export const { onNameFilter, onPriceFilter } = slice.actions;
 export const selectFilterParams = (state) => state.filter.filterParams;
 
 export default slice.reducer;
-

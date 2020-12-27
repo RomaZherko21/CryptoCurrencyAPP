@@ -1,23 +1,28 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import signInAPI from '../api/signIn'
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import signInAPI from "../api/signIn";
 
-export const onSubmit = createAsyncThunk('signIn/onSubmit', async (state) => {
-  let response = await signInAPI.signIn({ email: state.email, password: state.password })
+export const onSubmit = createAsyncThunk("signIn/onSubmit", async (state) => {
+  if (state.email < 2 || state.password.length < 2)
+    return { message: "Wrong data!", error: true };
+  const response = await signInAPI.signIn({
+    email: state.email,
+    password: state.password,
+  });
   return response.data;
-})
+});
 
 export const slice = createSlice({
-  name: 'signIn',
+  name: "signIn",
   initialState: {
-    email: '',
-    password: '',
-    currentUser:{
-      firstName:'',
-      lastName: '',
-      email: ''
+    email: "",
+    password: "",
+    currentUser: {
+      firstName: "",
+      lastName: "",
+      email: "",
     },
     isSignedIn: false,
-    errMessage:'',
+    errMessage: "",
   },
   reducers: {
     onEmailTyping: (state, action) => {
@@ -25,20 +30,20 @@ export const slice = createSlice({
     },
     onPasswordTyping: (state, action) => {
       state.password = action.payload;
-    }
+    },
   },
   extraReducers: {
     [onSubmit.fulfilled]: (state, action) => {
-      if(action.payload.error){
+      if (action.payload.error) {
         state.errMessage = action.payload.message;
-      }else{
+      } else {
         state.currentUser = {
-          ...action.payload.user
-        }
-        state.errMessage = '';
+          ...action.payload.user,
+        };
+        state.errMessage = "";
         state.isSignedIn = true;
-        state.email = '';
-        state.password = '';
+        state.email = "";
+        state.password = "";
       }
     },
   },

@@ -1,9 +1,15 @@
 import * as axios from "axios";
-import config from './config'
+import config from "./config";
 
 const signInAPI = {
   async signIn(user) {
-    return await axios.get(`${config.URL}/signIn?email=${user.email}&password=${user.password}`);
+    return await axios
+      .get(
+        `${config.SERVER_API}/signIn?email=${user.email}&password=${user.password}`
+      )
+      .catch((error) => {
+        console.log(error);
+      });
   },
 };
 
