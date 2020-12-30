@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import config from '../api/config'
+import config from "../api/config";
 
 export const getCurrency = createAsyncThunk(
   "mainPage/getCurrency",
@@ -18,17 +18,19 @@ export const slice = createSlice({
   },
   reducers: {
     onFilterSubmit: (state, action) => {
-      const arr = [];
+      let arr = [];
+
       const regexp = new RegExp(action.payload.name, "i");
       for (const item of state.allCurrenciesArr) {
         if (
-          (item.priceUsd <= action.payload.price &&
-            action.payload.name === "") ||
-          (item.priceUsd <= action.payload.price && regexp.test(item.name))
+          item.priceUsd <= action.payload.price &&
+          (action.payload.name === "" || regexp.test(item.name))
         ) {
           arr.push(item);
         }
       }
+
+      if (action.payload.priceSort) arr.sort((a, b) => b.priceUsd - a.priceUsd);
       state.currentCurrencyArr = [...arr];
     },
   },
@@ -41,7 +43,7 @@ export const slice = createSlice({
   },
 });
 
-export const { onFilterSubmit, } = slice.actions;
+export const { onFilterSubmit } = slice.actions;
 
 export const selectCurrentCurrencyArr = (state) =>
   state.mainPage.currentCurrencyArr;

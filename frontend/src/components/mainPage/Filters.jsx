@@ -1,12 +1,14 @@
 import React, { } from "react";
 import { useDispatch, useSelector } from 'react-redux'
-import { onNameFilter, onPriceFilter, selectFilterParams } from '../../state/filterReducer'
+import { onNameFilter, onPriceFilter, onPriceSortFilter, selectFilterParams } from '../../state/filterReducer'
 import { onFilterSubmit } from '../../state/mainPageReducer'
 
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Slider from "@material-ui/core/Slider";
 import TextField from "@material-ui/core/TextField";
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
 
 export default function Filters() {
 
@@ -34,6 +36,16 @@ export default function Filters() {
             }}
           />
         </div>
+        <FormControlLabel style={{ marginLeft: '20px' }}
+          control={
+            <Checkbox
+              onChange={() => dispatch(onPriceSortFilter())}
+              name="checkedB"
+              color="primary"
+            />
+          }
+          label="price sort"
+        />
         <Button onClick={() => {
           dispatch(onFilterSubmit(filterParams))
         }} variant="contained" color="primary" style={{ marginLeft: '30px', height: '30px', padding: '0px' }}>

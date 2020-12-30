@@ -10,7 +10,6 @@ export const onPageChange = createAsyncThunk(
 );
 export const onPutUser = createAsyncThunk("profile/onPutUser", async (user) => {
   let response = await usersListAPI.putUser(user);
-  console.log(response.data);
   return response.data;
 });
 

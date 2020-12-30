@@ -5,7 +5,8 @@ export const slice = createSlice({
   initialState: {
     filterParams: {
       name: "",
-      price: 20000,
+      price: 30000,
+      priceSort: false,
     },
   },
   reducers: {
@@ -15,10 +16,13 @@ export const slice = createSlice({
     onPriceFilter: (state, action) => {
       state.filterParams.price = action.payload;
     },
+    onPriceSortFilter: (state) => {
+      state.filterParams.priceSort = !state.filterParams.priceSort;
+    },
   },
 });
 
-export const { onNameFilter, onPriceFilter } = slice.actions;
+export const { onNameFilter, onPriceFilter, onPriceSortFilter } = slice.actions;
 
 export const selectFilterParams = (state) => state.filter.filterParams;
 

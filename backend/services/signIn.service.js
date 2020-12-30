@@ -1,19 +1,22 @@
 const app = require("../app");
 class SignInService {
   getUser(user, res) {
-    let sql = `SELECT firstName, lastName, email FROM users 
-    WHERE (email = '${user.email}' AND password = '${user.password}');`;
-    app.connection.query(sql, (err, rows) => {
-      if (rows.length===0 || err) {
-        res.json({
+    app.User.findOne({ where: { email: user.email, password: user.password } })
+      .then((user) => {
+        if (!user) {
+          res.status(405).json({
+            error: true,
+            message: "wrong data!",
+          });
+        }
+        res.status(200).json({ user, error: false });
+      })
+      .catch(() =>
+        res.status(404).json({
           error: true,
-          message: "wrong data!",
-        });
-      } else {
-        console.log("GET user: user was sended");
-        res.json({ user: { ...rows[0] }, error: false });
-      }
-    });
+          message: "Server ERROR!",
+        })
+      );
   }
 }
 
