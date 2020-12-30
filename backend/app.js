@@ -22,38 +22,16 @@ const User = sequelize.define("user", {
 });
 module.exports.User = User;
 
+const HOST = process.parsed.SERVER_HOST;
+const PORT = process.parsed.SERVER_PORT;
+
 sequelize
   .sync()
   .then(() => {
-    app.listen(process.parsed.SERVER_PORT, function () {
-      console.log("Сервер ожидает подключения...");
-    });
+    app.listen(PORT, HOST, () =>
+      console.log(`Server has been started on port ${PORT}`)
+    );
   })
   .catch((err) => console.log(err));
 
-  
 app.use("/", router);
-
-// const connection = mysql.createConnection({
-//   host: process.parsed.DB_HOST,
-//   user: process.parsed.DB_USER,
-//   password: process.parsed.DB_PASSWORD,
-//   database: process.parsed.DB_NAME,
-// });
-
-// module.exports.connection = connection;
-// const HOST = process.parsed.SERVER_HOST;
-// const PORT = process.parsed.SERVER_PORT;
-
-// connection.connect(function (err) {
-//   if (err) {
-//     console.error("Error: " + err.message);
-//   } else {
-//     console.log("MySQL was connected succesfully!!!");
-//   }
-// });
-
-
-// app.listen(PORT, HOST, () => {
-//   console.log(`Server has been started on port ${PORT}`);
-// });

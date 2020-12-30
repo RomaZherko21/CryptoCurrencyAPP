@@ -4,19 +4,21 @@ class SignInService {
     app.User.findOne({ where: { email: user.email, password: user.password } })
       .then((user) => {
         if (!user) {
-          res.status(405).json({
+          res.status(401).json({
             error: true,
-            message: "wrong data!",
+            message: "Sorry. There is no such user!",
           });
         }
         res.status(200).json({ user, error: false });
       })
-      .catch(() =>
-        res.status(404).json({
+      .catch((err) => {
+        console.log(`Error: getUser
+          ${err}`);
+        res.status(500).json({
           error: true,
-          message: "Server ERROR!",
-        })
-      );
+          message: "Sorry. There is server side problem. We'll fix it in few minutes!",
+        });
+      });
   }
 }
 

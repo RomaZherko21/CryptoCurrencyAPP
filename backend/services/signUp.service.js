@@ -12,11 +12,14 @@ class SignUpService {
           .status(201)
           .json({ message: `${user.email} was saved`, error: false });
       })
-      .catch(() =>
-        res.status(404).json({
+      .catch(() => {
+        console.log(`Error: postNewUser
+        ${err}`);
+        res.status(400).json({
+          message: `Sorry. ${user.email} wasn't saved`,
           error: true,
-        })
-      );
+        });
+      });
   }
 }
 

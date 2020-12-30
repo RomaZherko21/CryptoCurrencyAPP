@@ -4,9 +4,12 @@ class SignUpController {
   postNewUser(req, res) {
     for (let item of Object.values(req.body)) {
       if (item === "")
-        return res.json({
-          error: true,
-        });
+        console.log(`Error: postNewUser
+        ${err}`);
+      return res.status(400).json({
+        error: true,
+        message: "Sorry. Empty sign up fields!",
+      });
     }
     SignUpService.postNewUser(req.body, res);
   }
