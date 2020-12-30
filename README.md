@@ -3,13 +3,5 @@
 
 
 # **BackEnd**
-*Back-end part (MySQL database) is settle on localhost, so you can not get access to ***all users*** table and making new users*
-
-*MySQL User table description*
-user = `CREATE TABLE Users (
-    id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    firstName VARCHAR(30) NOT NULL,
-    lastName INT NOT NULL,
-    email VARCHAR(40) UNIQUE NOT NULL,
-    password VARCHAR(200) NOT NULL
-);`
+*Back-end part (MySQL database) is settle on localhost, so to get access to ***'all users'*** table and making new users you need to create MySQL database locally (I've used XAMPP for this), change .env file according to youre config and add new user with fields: firstName, lastName, email, password*
+*To start back-end (backend dir): npm install > npm start*

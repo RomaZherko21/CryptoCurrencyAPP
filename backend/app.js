@@ -32,6 +32,10 @@ sequelize
       console.log(`Server has been started on port ${PORT}`)
     );
   })
-  .catch((err) => console.log(err));
+  .catch((err) =>
+    console.log(`
+  Error: server wasn't started
+  ${err}`)
+  );
 
 app.use("/", router);
