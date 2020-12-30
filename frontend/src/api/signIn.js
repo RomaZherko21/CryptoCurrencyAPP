@@ -5,7 +5,7 @@ const signInAPI = {
   async signIn(user) {
     return await axios
       .get(
-        `${config.SERVER_API}/signIn?email=${user.email}&password=${user.password}`
+        `${config.SERVER_API}/auth/signIn?email=${user.email}&password=${user.password}`
       )
       .catch((error) => {
         console.log(error);

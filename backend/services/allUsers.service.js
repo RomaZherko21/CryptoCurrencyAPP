@@ -2,7 +2,7 @@ const app = require("../app");
 class AllUsersService {
   getUsers(page, res) {
     app.User.findAll({
-      attributes: ["firstNam", "lastName", "email"],
+      attributes: ["firstName", "lastName", "email"],
       raw: true,
       offset: (page - 1) * 6,
       limit: 6,
