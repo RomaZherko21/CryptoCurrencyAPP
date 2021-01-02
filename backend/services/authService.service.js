@@ -1,7 +1,7 @@
-const app = require("../app");
+const db = require("../models/index");
 class SignInService {
   getUser(user, res) {
-    app.User.findOne({ where: { email: user.email, password: user.password } })
+    db.user.findOne({ where: { email: user.email, password: user.password } })
       .then((user) => {
         if (!user) {
           res.status(401).json({
@@ -21,7 +21,7 @@ class SignInService {
       });
   }
   postNewUser(user, res) {
-    app.User.create({
+    db.user.create({
       firstName: user.firstName,
       lastName: user.lastName,
       email: user.email,

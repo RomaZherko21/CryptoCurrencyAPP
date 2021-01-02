@@ -1,7 +1,7 @@
-const app = require("../app");
+const db = require("../models/index");
 class AllUsersService {
   getUsers(page, res) {
-    app.User.findAll({
+    db.user.findAll({
       attributes: ["firstName", "lastName", "email"],
       raw: true,
       offset: (page - 1) * 6,
@@ -20,7 +20,7 @@ class AllUsersService {
       });
   }
   putUser(user, res) {
-    app.User.update(
+    db.user.update(
       { firstName: user.firstName, lastName: user.lastName },
       { where: { email: user.email } }
     )
